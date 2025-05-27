@@ -22,14 +22,13 @@
 
 | Column        | Type       | Options                       |
 |---------------|------------|-------------------------------|
-| image         | string     | null: false                   |
 | name          | string     | null: false                   |
 | description   | text       | null: false                   |
-| category      | string     | null: false                   |
-| shipping_fee  | integer    | null: false                   |
-| prefecture    | string     | null: false                   |
-| shipping_date | string     | null: false                   |
-| content       | text       | null: false                   |
+| category_id   | string     | null: false                   |
+| shipping_fee_id| integer    | null: false                  |
+| prefecture_id | string     | null: false                   |
+| shipping_date_id| string     | null: false                 |
+| content_id    | text       | null: false                   |
 | price         | integer    | null: false                   |
 | user          | references | null: false, foreign_key: true|
 
@@ -57,8 +56,8 @@
 
 | Column        | Type       | Options                         |
 |---------------|------------|---------------------------------|
-| postal_code   | string     | null: false                     |
-| prefecture    | string     | null: false                     |
+| postal_code_id| string     | null: false                     |
+| prefecture_id | string     | null: false                     |
 | city          | string     | null: false                     |
 | address       | string     | null: false                     |
 | building      | string     |                                 |
