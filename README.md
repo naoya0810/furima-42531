@@ -20,12 +20,18 @@
 
 ### Items テーブル
 
-| Column        | Type       | Options                        |
-|---------------|------------|---------------------------------|
+| Column        | Type       | Options                       |
+|---------------|------------|-------------------------------|
+| image         | string     | null: false                   |
 | name          | string     | null: false                   |
+| description   | text       | null: false                   |
+| category      | string     | null: false                   |
+| shipping_fee  | integer    | null: false                   |
+| prefecture    | string     | null: false                   |
+| shipping_date | string     | null: false                   |
 | content       | text       | null: false                   |
 | price         | integer    | null: false                   |
-| user_id       | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true|
 
 #### Association
 - belongs_to :user
@@ -43,6 +49,7 @@
 #### Association
 - belongs_to :user
 - belongs_to :item
+- has_one_ :address
 
 
 
