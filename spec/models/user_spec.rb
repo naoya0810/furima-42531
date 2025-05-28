@@ -140,6 +140,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birth date can't be blank")
       end
-    end # ← context '新規登録できないとき' の終わり
-  end # ← describe 'ユーザー新規登録' の終わり
-end # ← describe User, type: :model の終わり
+    end
+  end
+end
