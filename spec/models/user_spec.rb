@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = password
       @user.valid?
       expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
-    end # ← ここを追加！
+    end
 
     it 'last_nameが空では登録できない' do
       @user.last_name = ''
