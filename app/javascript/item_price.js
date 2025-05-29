@@ -1,4 +1,4 @@
-document.addEventListener("turbo:load", function () {
+function setupPriceCalc() {
   const priceInput = document.getElementById("item-price");
   const taxOutput = document.getElementById("add-tax-price");
   const profitOutput = document.getElementById("profit");
@@ -20,4 +20,8 @@ document.addEventListener("turbo:load", function () {
     taxOutput.textContent = tax;
     profitOutput.textContent = profit;
   });
-});
+}
+
+// Turboによる画面描画に対応
+document.addEventListener("turbo:load", setupPriceCalc);
+document.addEventListener("turbo:render", setupPriceCalc);
