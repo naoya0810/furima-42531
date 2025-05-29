@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      item: 商品
+    attributes:
+      item:
+        name: 商品名
+        description: 商品の説明
+        category: カテゴリー
+        condition: 商品の状態
+        shipping_fee: 配送料の負担
+        prefecture: 発送元の地域
+        shipping_date: 発送までの日数
+        price: 価格
+        image: 画像
+  errors:
+    messages:
+      blank: "を入力してください"
+      not_a_number: "は数値で入力してください"
