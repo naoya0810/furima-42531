@@ -19,6 +19,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('画像 を添付してください')
       end
 
+      it 'userが紐づいていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Userを入力してください')
+      end
+
       it '商品名が空では保存できない' do
         @item.name = ''
         @item.valid?
