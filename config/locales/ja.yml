@@ -1,10 +1,14 @@
 ja:
+  date:
+    order:
+      - :year
+      - :month
+      - :day
   activerecord:
     models:
       item: 商品
     attributes:
       item:
-        item:
         image: 画像
         name: 商品名
         description: 商品の説明
