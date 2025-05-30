@@ -19,7 +19,7 @@
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
+        ¥ <%= @item.price %>
       </span>
       <span class="item-postage">
         <%= @item.shipping_fee.name %>
