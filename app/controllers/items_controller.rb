@@ -14,9 +14,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    return unless current_user != @item.user || @item.order.present?
-
-    redirect_to root_path
+    redirect_to root_path if current_user != @item.user || @item.order.present?
   end
 
   def update
