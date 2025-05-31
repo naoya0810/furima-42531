@@ -21,9 +21,9 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
+    return redirect_to root_path if current_user != @item.user || @item.order.present?
 
     if params[:item][:image].blank?
-
       if @item.update(item_params.except(:image))
         redirect_to item_path(@item)
       else
