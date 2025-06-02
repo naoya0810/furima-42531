@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   def index
     @items = Item.order(created_at: :desc)
@@ -18,7 +18,6 @@ class ItemsController < ApplicationController
 
   def update
     redirect_to root_path if current_user != @item.user || # @item.order.present?
-
                              if params[:item][:image].blank?
                                if @item.update(item_params.except(:image))
                                  redirect_to item_path(@item)
