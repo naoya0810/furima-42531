@@ -1,6 +1,4 @@
 <%= render "shared/header" %>
-
-<%# 商品の概要 %>
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
@@ -14,7 +12,7 @@
   <div class="sold-out">
     <span>Sold Out!!</span>
   </div>
-  <% #end %>
+  <% end %>
   </div>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     <div class="item-price-box">
@@ -28,7 +26,7 @@
 
     
     <% if user_signed_in? && current_user == @item.user && #@item.order.blank? %>
-    <%= link_to "商品の編集", "#", class: "item-red-btn" %>
+    <%= link_to "商品の編集", edit_item_path(@item), class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除","#", data: {turbo_method: :delete}, class:"item-destroy" %>
     <% end %>
@@ -81,7 +79,6 @@
       </div>
     </div>
   </div>
-  <%# /商品の概要 %>
 
   <div class="comment-box">
     <form>
