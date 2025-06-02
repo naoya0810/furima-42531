@@ -1,5 +1,9 @@
 class RemoveContentIdFromItems < ActiveRecord::Migration[7.1]
-  def change
-    remove_column :items, :content_id, :integer
+  def up
+    remove_column :items, :content_id
+  end
+
+  def down
+    add_column :items, :content_id, :integer
   end
 end
