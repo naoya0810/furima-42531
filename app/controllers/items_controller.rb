@@ -17,19 +17,19 @@ class ItemsController < ApplicationController
   end
 
   def update
-    return redirect_to root_path if current_user != @item.user || @item.order.present?
+    redirect_to root_path if current_user != @item.user || # @item.order.present?
 
-    if params[:item][:image].blank?
-      if @item.update(item_params.except(:image))
-        redirect_to item_path(@item)
-      else
-        render :edit
-      end
-    elsif @item.update(item_params)
-      redirect_to item_path(@item)
-    else
-      render :edit
-    end
+                             if params[:item][:image].blank?
+                               if @item.update(item_params.except(:image))
+                                 redirect_to item_path(@item)
+                               else
+                                 render :edit
+                               end
+                             elsif @item.update(item_params)
+                               redirect_to item_path(@item)
+                             else
+                               render :edit
+                             end
   end
 
   def create
