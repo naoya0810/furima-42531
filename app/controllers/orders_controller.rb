@@ -1,14 +1,16 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
+  before_action :move_to_root_if_invalid_order, only: [:index, :create]
 
   def index
-    @order = Order.new
+    @order_form = OrderForm.new
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.save
+    @order_form = OrderForm.new(order_params)
+    if @order_form.valid?
+      @order_form.save
       redirect_to root_path
     else
       render :index
@@ -21,7 +23,14 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def move_to_root_if_invalid_order
+    return unless current_user == @item.user || @item.order.present?
+
+    redirect_to root_path
+  end
+
   def order_params
-    params.require(:order).permit(:user_id, :item_id).merge(user_id: current_user.id, item_id: @item.id)
+    params.require(:order_form).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number)
+          .merge(user_id: current_user.id, item_id: @item.id)
   end
 end
