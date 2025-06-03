@@ -76,5 +76,7 @@ end
 group :production do
   gem 'pg'
 end
+gem 'dotenv-rails'
 gem 'devise'
 gem 'active_hash'
+gem 'payjp'
