@@ -2,6 +2,16 @@
 
 <div class='transaction-contents'>
   <div class='transaction-main'>
+    <% if @order_form.errors.any? %>
+  <div class="error-alert">
+    <ul>
+      <% @order_form.errors.full_messages.each do |message| %>
+        <li class="error-message"><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
     <h1 class='transaction-title-text'>
       購入内容の確認
     </h1>
