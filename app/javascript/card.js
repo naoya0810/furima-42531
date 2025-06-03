@@ -1,7 +1,15 @@
-const payjp = Payjp(pk_test_ecf1558c58c97fd0eaf568ff); // 例: Payjp('pk_test_xxx')
+
+const payjp = Payjp('pk_test_ecf1558c58c97fd0eaf568ff');
 const elements = payjp.elements();
-const card = elements.create('card');
+
+const card = elements.create('cardNumber');
 card.mount('#number-form');
+
+const expiry = elements.create('cardExpiry');
+expiry.mount('#expiry-form');
+
+const cvc = elements.create('cardCvc');
+cvc.mount('#cvc-form');
 
 const form = document.getElementById("charge-form");
 form.addEventListener("submit", (e) => {
@@ -9,7 +17,7 @@ form.addEventListener("submit", (e) => {
 
   payjp.createToken(card).then((response) => {
     if (response.error) {
-      // エラーハンドリング（例：アラート表示など）
+      alert(response.error.message); // ← エラー確認用
     } else {
       const token = response.id;
       const hiddenInput = document.createElement("input");
