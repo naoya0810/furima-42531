@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  require 'payjp'
   before_action :authenticate_user!
   before_action :set_item
   before_action :move_to_root_if_invalid_order, only: [:index, :create]
