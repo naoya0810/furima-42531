@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @user = FactoryBot.create(:user)
-    @item = FactoryBot.create(:item)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
+    @user.save
+    @item.save
     @order_form = OrderForm.new(
       user_id: @user.id,
       item_id: @item.id,
@@ -33,13 +35,13 @@ RSpec.describe OrderForm, type: :model do
       it 'tokenが空では購入できない' do
         @order_form.token = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Token can't be blank")
+        expect(@order_form.errors.full_messages).to include('Tokenを入力してください')
       end
 
       it 'postal_codeが空では購入できない' do
         @order_form.postal_code = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Postal code can't be blank")
+        expect(@order_form.errors.full_messages).to include('Postal codeを入力してください')
       end
 
       it 'postal_codeがハイフンなしでは購入できない' do
@@ -57,19 +59,19 @@ RSpec.describe OrderForm, type: :model do
       it 'cityが空では購入できない' do
         @order_form.city = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("City can't be blank")
+        expect(@order_form.errors.full_messages).to include('Cityを入力してください')
       end
 
       it 'addressesが空では購入できない' do
         @order_form.addresses = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Addresses can't be blank")
+        expect(@order_form.errors.full_messages).to include('Addressesを入力してください')
       end
 
       it 'phone_numberが空では購入できない' do
         @order_form.phone_number = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Phone number can't be blank")
+        expect(@order_form.errors.full_messages).to include('Phone numberを入力してください')
       end
 
       it 'phone_numberが12桁以上では購入できない' do
@@ -87,13 +89,13 @@ RSpec.describe OrderForm, type: :model do
       it 'user_idが空だと購入できない' do
         @order_form.user_id = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("User can't be blank")
+        expect(@order_form.errors.full_messages).to include('Userを入力してください')
       end
 
       it 'item_idが空だと購入できない' do
         @order_form.item_id = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Item can't be blank")
+        expect(@order_form.errors.full_messages).to include('Itemを入力してください')
       end
     end
   end
