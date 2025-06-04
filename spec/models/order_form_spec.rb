@@ -85,6 +85,12 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include('Phone number は10〜11桁の数字で入力してください')
       end
 
+      it 'phone_numberが9桁以下では購入できない' do
+        @order_form.phone_number = '090123456' # 9桁
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include('Phone numberは10〜11桁の数字で入力してください')
+      end
+
       it 'user_idが空では購入できない' do
         @order_form.user_id = nil
         @order_form.valid?
