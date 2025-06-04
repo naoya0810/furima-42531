@@ -11,6 +11,7 @@ class Item < ApplicationRecord
 
   validates :image, presence: { message: 'を添付してください' }
   validates :name, presence: true
+  validates :user, presence: true
   validates :description, presence: true
   validates :category_id, numericality: { other_than: 1, message: 'を選択してください' }
   validates :condition_id, numericality: { other_than: 1, message: 'を選択してください' }

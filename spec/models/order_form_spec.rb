@@ -7,19 +7,20 @@ RSpec.describe OrderForm, type: :model do
     @order_form = OrderForm.new(
       user_id: @user.id,
       item_id: @item.id,
+      token: 'tok_abcdefghijk00000000000000000',
       postal_code: '123-4567',
       prefecture_id: 2,
-      city: '横浜市',
-      addresses: '青山1-1-1',
-      building: '柳ビル103',
-      phone_number: '09012345678',
-      token: 'tok_abcdefghijk00000000000000000'
+      city: '渋谷区',
+      addresses: '1-1',
+      building: 'テストビル',
+      phone_number: '09012345678'
     )
+    sleep(0.1) # DBアクセスの速度調整（必要なら）
   end
 
   describe '商品購入機能' do
     context '購入できるとき' do
-      it '全ての値が正しく入力されていれば購入できる' do
+      it 'すべての情報が正しく入力されていれば購入できる' do
         expect(@order_form).to be_valid
       end
 
@@ -33,17 +34,16 @@ RSpec.describe OrderForm, type: :model do
       it 'tokenが空では購入できない' do
         @order_form.token = ''
         @order_form.valid?
-        puts @order_form.errors.full_messages # ←追加
-        expect(@order_form.errors.full_messages).to include('Tokenを入力してください')
+        expect(@order_form.errors.full_messages).to include('Token を入力してください')
       end
 
       it 'postal_codeが空では購入できない' do
         @order_form.postal_code = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Postal codeを入力してください')
+        expect(@order_form.errors.full_messages).to include('Postal code を入力してください')
       end
 
-      it 'postal_codeがハイフンなしでは購入できない' do
+      it 'postal_codeにハイフンが含まれていないと購入できない' do
         @order_form.postal_code = '1234567'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Postal code は「123-4567」の形式で入力してください')
@@ -58,19 +58,19 @@ RSpec.describe OrderForm, type: :model do
       it 'cityが空では購入できない' do
         @order_form.city = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Cityを入力してください')
+        expect(@order_form.errors.full_messages).to include('City を入力してください')
       end
 
       it 'addressesが空では購入できない' do
         @order_form.addresses = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Addressesを入力してください')
+        expect(@order_form.errors.full_messages).to include('Addresses を入力してください')
       end
 
       it 'phone_numberが空では購入できない' do
         @order_form.phone_number = ''
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Phone numberを入力してください')
+        expect(@order_form.errors.full_messages).to include('Phone number を入力してください')
       end
 
       it 'phone_numberが12桁以上では購入できない' do
@@ -79,22 +79,22 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include('Phone number は10〜11桁の数字で入力してください')
       end
 
-      it 'phone_numberにハイフンがあると購入できない' do
+      it 'phone_numberにハイフンが含まれていると購入できない' do
         @order_form.phone_number = '090-1234-5678'
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include('Phone number は10〜11桁の数字で入力してください')
       end
 
-      it 'user_idが空だと購入できない' do
+      it 'user_idが空では購入できない' do
         @order_form.user_id = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Userを入力してください')
+        expect(@order_form.errors.full_messages).to include('User を入力してください')
       end
 
-      it 'item_idが空だと購入できない' do
+      it 'item_idが空では購入できない' do
         @order_form.item_id = nil
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include('Itemを入力してください')
+        expect(@order_form.errors.full_messages).to include('Item を入力してください')
       end
     end
   end
