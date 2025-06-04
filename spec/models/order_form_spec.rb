@@ -35,6 +35,7 @@ RSpec.describe OrderForm, type: :model do
       it 'tokenが空では購入できない' do
         @order_form.token = ''
         @order_form.valid?
+        puts @order_form.errors.full_messages # ←追加
         expect(@order_form.errors.full_messages).to include('Tokenを入力してください')
       end
 
