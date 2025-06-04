@@ -1,5 +1,5 @@
 
-const payjp = Payjp('pk_test_ecf1558c58c97fd0eaf568ff');
+const payjp = Payjp(gon.public_key);
 const elements = payjp.elements();
 
 const card = elements.create('cardNumber');
