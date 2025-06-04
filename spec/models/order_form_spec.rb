@@ -2,10 +2,8 @@ require 'rails_helper'
 
 RSpec.describe OrderForm, type: :model do
   before do
-    @user = FactoryBot.build(:user)
-    @item = FactoryBot.build(:item)
-    @user.save
-    @item.save
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
     @order_form = OrderForm.new(
       user_id: @user.id,
       item_id: @item.id,
