@@ -4,17 +4,16 @@ RSpec.describe OrderForm, type: :model do
   before do
     @user = FactoryBot.create(:user)
     @item = FactoryBot.create(:item)
-    @order_form = OrderForm.new(
-      user_id: @user.id,
-      item_id: @item.id,
-      token: 'tok_abcdefghijk00000000000000000',
-      postal_code: '123-4567',
-      prefecture_id: 2,
-      city: '渋谷区',
-      addresses: '1-1',
-      building: 'テストビル',
-      phone_number: '09012345678'
-    )
+    @order_form = FactoryBot.build(:order_form,
+                                   user_id: @user.id,
+                                   item_id: @item.id,
+                                   token: 'tok_abcdefghijk00000000000000000',
+                                   postal_code: '123-4567',
+                                   prefecture_id: 2,
+                                   city: '渋谷区',
+                                   addresses: '1-1',
+                                   building: 'テストビル',
+                                   phone_number: '09012345678')
     sleep(0.1) # DBアクセスの速度調整（必要なら）
   end
 
