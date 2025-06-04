@@ -1,37 +1,47 @@
 
-const payjp = Payjp(gon.public_key);
-const elements = payjp.elements();
+const pay = () => {
+  const publicKey = gon.public_key;
+  const payjp = Payjp(publicKey); 
+  const elements = payjp.elements();
 
-const card = elements.create('cardNumber');
-card.mount('#number-form');
+  const numberElement = elements.create('cardNumber');
+  const expiryElement = elements.create('cardExpiry');
+  const cvcElement = elements.create('cardCvc');
 
-const expiry = elements.create('cardExpiry');
-expiry.mount('#expiry-form');
+  numberElement.mount('#number-form');
+  expiryElement.mount('#expiry-form');
+  cvcElement.mount('#cvc-form');
 
-const cvc = elements.create('cardCvc');
-cvc.mount('#cvc-form');
+  const form = document.getElementById('charge-form');
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-const form = document.getElementById("charge-form");
-const submitBtn = document.querySelector("#charge-form input[type='submit']");
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  submitBtn.disabled = true;
-
-  payjp.createToken(card).then((response) => {
-    if (response.error) {
-      alert(response.error.message);
-
-      submitBtn.disabled = false;
-    } else {
+    payjp.createToken(numberElement).then(function (response) {
+      if (response.error) {
+        const errorContainer = document.getElementById('card-errors');
+        if (errorContainer) {
+          errorContainer.textContent = response.error.message;
+        } else {
+          const errorDiv = document.createElement('div');
+          errorDiv.id = 'card-errors';
+          errorDiv.style.color = 'red';
+          errorDiv.textContent = response.error.message;
+          form.prepend(errorDiv);
+        }
+        return;
+      }
       const token = response.id;
-      const hiddenInput = document.createElement("input");
-      hiddenInput.setAttribute("type", "hidden");
-      hiddenInput.setAttribute("name", "order_form[token]");
-      hiddenInput.setAttribute("value", token);
-      form.appendChild(hiddenInput);
+      const renderDom = document.getElementById("charge-form");
+      const tokenObj = `<input value=${token} name='token' type="hidden">`;
+      renderDom.insertAdjacentHTML("beforeend", tokenObj);
 
-      form.submit(); 
-    }
+      numberElement.clear();
+      expiryElement.clear();
+      cvcElement.clear();
+      document.getElementById("charge-form").submit();
+    });
   });
-});
+};
+
+window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);
