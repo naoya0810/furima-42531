@@ -8,10 +8,8 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %> 
-  <%= include_gon %>
-
+  <script type="text/javascript" src="https://js.pay.jp/v2/pay.js"></script>
   <!-- ✅ PAY.JPのライブラリ -->
-  <%= javascript_include_tag "https://js.pay.jp/v2/" %>
 </head>
 
 <body>
