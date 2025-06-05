@@ -2,4 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "item_price"
-import "./card"  // これを追加！
+import "card"  // これを追加！
