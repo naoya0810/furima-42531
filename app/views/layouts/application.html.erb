@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
 
-  <!-- ✅ PAY.JPのJavaScriptを追加！ -->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %> <!-- これでapplication.jsが読み込まれる -->
+
+  <!-- ✅ PAY.JPのライブラリ -->
   <%= javascript_include_tag "https://js.pay.jp/v2/" %>
 </head>
 
 <body>
-  <!-- ✅ あなたのcard.js（トークン作成の処理） -->
-  <%= javascript_include_tag "card", type: "module" %>
-  <%= javascript_include_tag "item_price", type: "module" %>
-
   <%= yield %>
 </body>
 </html>
