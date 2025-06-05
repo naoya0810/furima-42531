@@ -7,7 +7,8 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %> <!-- これでapplication.jsが読み込まれる -->
+  <%= javascript_importmap_tags %> 
+  <%= include_gon %>
 
   <!-- ✅ PAY.JPのライブラリ -->
   <%= javascript_include_tag "https://js.pay.jp/v2/" %>
