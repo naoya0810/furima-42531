@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     @order_form = OrderForm.new(order_params)
+    @item = Item.find(params[:item_id]) # ← 必須！
     if @order_form.valid?
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       Payjp::Charge.create(
@@ -21,6 +22,7 @@ class OrdersController < ApplicationController
       @order_form.save
       redirect_to root_path
     else
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY'] # ← これも必須！
       render :index
     end
   end
