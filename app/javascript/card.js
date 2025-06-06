@@ -18,23 +18,12 @@ const pay = () => {
 
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
-        const errorContainer = document.getElementById('card-errors');
-        if (errorContainer) {
-          errorContainer.textContent = response.error.message;
-        } else {
-          const errorDiv = document.createElement('div');
-          errorDiv.id = 'card-errors';
-          errorDiv.style.color = 'red';
-          errorDiv.textContent = response.error.message;
-          form.prepend(errorDiv);
-        }
-        return;
-      }
+      } else {
       const token = response.id;
       const renderDom = document.getElementById("charge-form");
       const tokenObj = `<input value=${token} name='token' type="hidden">`;
       renderDom.insertAdjacentHTML("beforeend", tokenObj);
-
+      }
       numberElement.clear();
       expiryElement.clear();
       cvcElement.clear();
