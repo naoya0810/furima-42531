@@ -49,7 +49,10 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: furima-42531_production
+  username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
   socket: /tmp/mysql.sock
