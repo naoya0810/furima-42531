@@ -74,7 +74,7 @@ group :development do
   gem 'rubocop', '1.71.2', require: false
 end
 group :production do
-  gem 'pg', '~> 1.3.0'
+  #gem 'pg', '~> 1.3.0'
   gem 'unicorn', '6.1.0'
 end
 gem 'dotenv-rails'
